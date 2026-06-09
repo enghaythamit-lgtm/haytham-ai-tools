@@ -1,0 +1,161 @@
+/* css/viral.css - نظام تصميم المحتوى الفيروسي */
+
+/* الحاوية الرئيسية لعرض النتائج */
+.viral-results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+/* كروت الأقسام الفيروسية */
+.viral-section-card {
+    background: var(--surface-light);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.viral-section-card:hover {
+    border-color: var(--accent-gold);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.05);
+}
+
+/* الكارت المميز (للسكربت الصوتي) */
+.highlight-card {
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.highlight-card .viral-section-header {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* هيدر الكارت */
+.viral-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.viral-section-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Alexandria', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.viral-section-header h3 i {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+}
+
+/* محتوى الكارت (النتائج) */
+.viral-section-body {
+    padding: 20px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    white-space: pre-line;
+}
+
+/* تخصيص زر النَسخ لكل قسم */
+.btn-copy-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-section:hover {
+    background: var(--accent-gold);
+    color: var(--bg-dark);
+    border-color: var(--accent-gold);
+}
+
+/* تخصيص زر التوليد في الشريط الجانبي */
+.btn-generate-ai {
+    width: 100%;
+    padding: 16px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Alexandria', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-generate-ai:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+/* تأثير النبض لأيقونة الذكاء الاصطناعي */
+.pulse-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* تنسيق النصوص المولدة */
+.viral-hook {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.viral-hook:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.hook-number {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--accent-gold);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: 'Outfit', sans-serif;
+    flex-shrink: 0;
+}
+
+.viral-text-highlight {
+    color: var(--accent-gold);
+    font-weight: bold;
+}

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد بوستات الكاروسيل الاحترافي | هيثم إبراهيم</title>
+    
+    <!-- خطوط جوجل الخط العربي Cairo والخط الإنجليزي للمؤشرات والأرقام Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800&family=Cairo:wght@300;400;600;700;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- أيقونات RemixIcon العصرية فائقة الجودة -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    
+    <!-- نظام التنسيقات الرئيسي -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- مكتبة html2canvas لتحميل الصور بدقة عالية جداً -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <!-- كرات النيون التفاعلية في الخلفية -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="top-navbar" id="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon-wrap">
+                    <i class="ri-robot-2-line"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Haytham Ibrahim AI</h1>
+                    <span class="brand-subtitle">نظام توليد المحتوى اليومي الاحترافي</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active"><i class="ri-layout-grid-line"></i> مولّد الكاروسيل</a>
+                <a href="daily-posts.html" class="nav-link"><i class="ri-calendar-schedule-line"></i> البوستات اليومية</a>
+                <a href="viral-generator.html" class="nav-link"><i class="ri-fire-fill"></i> المحتوى الفيروسي</a>
+                <a href="tool.html" class="nav-link"><i class="ri-tools-line"></i> صفحة الأداة</a>
+                <a href="instagram-profile.html" class="nav-link"><i class="ri-instagram-line"></i> صفحة الهبوط</a>
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn-arrow" onclick="history.back()" title="رجوع"><i class="ri-arrow-right-line"></i></button>
+                <button class="nav-action-btn-arrow" onclick="history.forward()" title="تقدم"><i class="ri-arrow-left-line"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- شريط التحكم والإعدادات الجانبي (Editor) -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="ri-magic-line"></i>
+                <div>
+                    <h2>مولّد الكاروسيل</h2>
+                    <span class="badge-premium">النسخة الاحترافية V2.0</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-sections-wrapper">
+                <!-- 1. إعدادات الحساب والتوثيق -->
+                <div class="sidebar-card">
+                    <h3 class="card-title"><i class="ri-user-settings-line"></i> الملف الشخصي</h3>
+                    
+                    <div class="profile-editor">
+                        <div class="avatar-uploader-container">
+                            <div class="avatar-preview-wrapper">
+                                <img id="profile-avatar-preview" src="personal_photo.png" alt="الصورة الشخصية">
+                                <label for="avatar-upload" class="btn-upload-avatar">
+                                    <i class="ri-camera-lens-line"></i>
+                                </label>
+                            </div>
+                            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                            <div class="avatar-uploader-info">
+                                <span class="upload-title">صورتك الشخصية</span>
+                                <small class="text-muted">اضغط لتغيير الصورة</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username-input">الاسم المعروض</label>
+                            <div class="input-with-icon">
+                                <i class="ri-user-line"></i>
+                                <input type="text" id="username-input" value="هيثم إبراهيم" placeholder="أدخل اسمك الكريم">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="handle-input">اسم المعرف (Handle)</label>
+                            <div class="input-with-icon">
+                                <i class="ri-at-line"></i>
+                                <input type="text" id="handle-input" value="haytham_ibrahim" placeholder="مثال: haytham_tech">
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="verified-toggle" checked>
+                            <label for="verified-toggle" class="verified-label">
+                                <i class="ri-checkbox-circle-fill verified-badge-icon"></i>
+                                <span>تفعيل علامة التوثيق الزرقاء</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة أوقات النشر المثالية -->
+                <div class="sidebar-card publishing-times-card">
+                    <h3 class="card-title"><i class="ri-time-line"></i> أفضل أوقات النشر للتفاعل والظهور</h3>
+                    <div class="publishing-times-list">
+                        <div class="time-item instagram">
+                            <div class="platform-info">
+                                <i class="ri-instagram-line"></i>
+                                <span>إنستجرام</span>
+                            </div>
+                            <span class="time-value">12:00 م - 3:00 م | 7:00 م - 9:00 م</span>
+                        </div>
+                        <div class="time-item linkedin">
+                            <div class="platform-info">
+                                <i class="ri-linkedin-box-line"></i>
+                                <span>لينكد إن</span>
+                            </div>
+                            <span class="time-value">8:00 ص - 11:00 ص | 5:00 م - 6:00 م</span>
+                        </div>
+                        <div class="time-item youtube">
+                            <div class="platform-info">
+                                <i class="ri-youtube-line"></i>
+                                <span>يوتيوب</span>
+                            </div>
+                            <span class="time-value">2:00 م - 5:00 م | 6:00 م - 9:00 م</span>
+                        </div>
+                        <div class="time-item twitter-x">
+                            <div class="platform-info">
+                                <i class="ri-twitter-x-line"></i>
+                                <span>منصة X</span>
+                            </div>
+                            <span class="time-value">9:00 ص - 12:00 م | 6:00 م - 8:00 م</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. التوليد التلقائي بالذكاء الاصطناعي (AI Automation System) -->
+                <div class="sidebar-card" style="border: 1px solid rgba(0, 119, 255, 0.25); background: linear-gradient(135deg, rgba(0, 119, 255, 0.05) 0%, rgba(255,255,255,0.01) 100%);">
+                    <h3 class="card-title" style="border-right-color: var(--accent-blue);"><i class="ri-robot-3-line" style="color: var(--accent-blue);"></i> صناعة المحتوى التلقائي بالذكاء الاصطناعي</h3>
+                    
+                    <div class="form-group">
+                        <label for="ai-niche-select">تصنيف أداة الذكاء الاصطناعي</label>
+                        <select id="ai-niche-select">
+                            <option value="text">✍️ توليد وكتابة النصوص والمقالات (Text AI)</option>
+                            <option value="image">🎨 تصميم الصور والرسم الرقمي (Image AI)</option>
+                            <option value="video">🎬 تحرير وصناعة الفيديو والأنيميشن (Video AI)</option>
+                            <option value="coding">💻 البرمجة وتطوير المواقع الذكية (Coding AI)</option>
+                            <option value="productivity">⚡ تحسين الإنتاجية وتنظيم الأعمال (Productivity AI)</option>
+                            <option value="audio">🎵 الهندسة الصوتية والموسيقى الذكية (Audio AI)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 10px; display: none;">
+                        <label for="ai-tool-concept">اسم الأداة أو فكرتها باللغة العربية *</label>
+                        <input type="text" id="ai-tool-concept" value="اتوماتيك مع التنوع">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="ai-tone-select">نبرة وصوت الكتابة</label>
+                        <select id="ai-tone-select">
+                            <option value="enthusiastic" selected>🔥 حماسي وتفاعلي جداً</option>
+                            <option value="professional">💼 مهني ووقور</option>
+                            <option value="creative">💡 إبداعي وعميق</option>
+                            <option value="informative">📚 تعليمي ومبسط</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-primary" id="btn-generate-ai" style="width: 100%; justify-content: center; margin-top: 15px; background: linear-gradient(135deg, var(--accent-blue) 0%, #0055cc 100%); color: #fff; box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);">
+                        <i class="ri-sparkles-line"></i>
+                        <span>توليد المحتوى التلقائي للبوستات ✨</span>
+                    </button>
+                </div>
+
+                <!-- 3. محرر البوستات الأربعة -->
+                <div class="sidebar-card">
+                    <h3 class="card-title"><i class="ri-draft-line"></i> محتوى كروت الكاروسيل (4 بوستات)</h3>
+                    
+                    <div class="tabs-control">
+                        <button class="tab-btn active" data-tab="post-1">البوست 1 <small>الأداة</small></button>
+                        <button class="tab-btn" data-tab="post-2">البوست 2 <small>الشرح</small></button>
+                        <button class="tab-btn" data-tab="post-3">البوست 3 <small>الطريقة</small></button>
+                        <button class="tab-btn" data-tab="post-4">البوست 4 <small>الرابط</small></button>
+                    </div>
+                    
+                    <!-- محتوى التاب 1: الأداة -->
+                    <div class="tab-pane active" id="pane-post-1">
+                        <div class="form-group">
+                            <label for="p1-title">عنوان البوست (اسم الأداة) *</label>
+                            <input type="text" id="p1-title" value="مساعد الذكاء الاصطناعي الخارق 🚀" placeholder="أدخل اسم الأداة...">
+                        </div>
+                        <div class="form-group">
+                            <label for="p1-subtitle">وصف البوست (الفكرة الأساسية)</label>
+                            <textarea id="p1-subtitle" rows="3" placeholder="اكتب نبذة سريعة تشد الانتباه للأداة...">الأداة الثورية التي تختصر عليك ساعات من العمل الشاق وتنجز مهامك بضغطة زر واحدة بالذكاء الاصطناعي المطور.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="p1-tag">شعار فرعي (Tag)</label>
+                            <input type="text" id="p1-tag" value="أدوات ذكية" placeholder="مثال: ذكاء اصطناعي">
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            <label for="p1-icon">أيقونة الأداة</label>
+                            <select id="p1-icon">
+                                <option value="ri-magic-line" selected>عصا سحرية</option>
+                                <option value="ri-cpu-line">معالج / تكنولوجيا</option>
+                                <option value="ri-flashlight-line">برق / سرعة</option>
+                                <option value="ri-code-s-slash-line">أكواد برمجية</option>
+                                <option value="ri-lightbulb-line">فكرة / إضاءة</option>
+                                <option value="ri-rocket-line">صاروخ</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- محتوى التاب 2: الشرح -->
+                    <div class="tab-pane" id="pane-post-2">
+                        <div class="form-group">
+                            <label for="p2-title">عنوان البوست (الشرح) *</label>
+                            <input type="text" id="p2-title" value="ما هي هذه الأداة وبماذا تفيدك؟ 🤔" placeholder="أدخل عنوان الشرح...">
+                        </div>
+                        <div class="form-group">
+                            <label>أبرز المميزات والشرح (3 نقاط)</label>
+                            <div class="input-list">
+                                <div class="input-item">
+                                    <span class="number-badge">1</span>
+                                    <input type="text" class="p2-point" value="توليد فوري ومؤتمت للمحتوى الاحترافي بدون خبرة سابقة" placeholder="الميزة الأولى">
+                                </div>
+                                <div class="input-item">
+                                    <span class="number-badge">2</span>
+                                    <input type="text" class="p2-point" value="توفير أكثر من 70% من الوقت والجهد المبذول في التصميم والتفكير" placeholder="الميزة الثانية">
+                                </div>
+                                <div class="input-item">
+                                    <span class="number-badge">3</span>
+                                    <input type="text" class="p2-point" value="خوارزميات ذكية متوافقة تماماً مع معايير السيو والانتشار السريع" placeholder="الميزة الثالث">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- محتوى التاب 3: الطريقة -->
+                    <div class="tab-pane" id="pane-post-3">
+                        <div class="form-group">
+                            <label for="p3-title">عنوان البوست (طريقة الاستخدام) *</label>
+                            <input type="text" id="p3-title" value="طريقة الاستخدام بثلاث خطوات بسيطة 🛠️" placeholder="عنوان طريقة الاستخدام...">
+                        </div>
+                        <div class="form-group">
+                            <label>خطوات الاستخدام بالتفصيل (3 خطوات)</label>
+                            <div class="input-list">
+                                <div class="input-item">
+                                    <span class="number-badge">1</span>
+                                    <input type="text" class="p3-step" value="قم بالدخول إلى رابط الأداة الرسمي الموضح في البوست القادم" placeholder="الخطوة الأولى">
+                                </div>
+                                <div class="input-item">
+                                    <span class="number-badge">2</span>
+                                    <input type="text" class="p3-step" value="اكتب فكرتك أو مشروعك ودع الذكاء الاصطناعي يقوم بالسحر فوراً" placeholder="الخطوة الثانية">
+                                </div>
+                                <div class="input-item">
+                                    <span class="number-badge">3</span>
+                                    <input type="text" class="p3-step" value="احفظ النتيجة بنقرة واحدة وشاركها مع أصدقائك ومتابعيك بكل سهولة" placeholder="الخطوة الثالثة">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- محتوى التاب 4: الرابط والدعوة تفاعلية -->
+                    <div class="tab-pane" id="pane-post-4">
+                        <div class="form-group">
+                            <label for="p4-title">عنوان البوست (رابط الأداة) *</label>
+                            <input type="text" id="p4-title" value="ابدأ الآن مجاناً ووفّر وقتك! 🔗" placeholder="أدخل عنوان الرابط...">
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            <label for="p4-link">رابط الأداة (الموقع)</label>
+                            <input type="text" id="p4-link" value="www.haythamtech.com/tool" placeholder="أدخل رابط الأداة...">
+                        </div>
+                        <div class="form-group">
+                            <label for="p4-cta">العبارة التفاعلية (في نهاية البوست) *</label>
+                            <textarea id="p4-cta" rows="3" placeholder="عبارة تشجيعية في الأسفل...">احفظ الفيديو وتابعنى لتعرف كل جديد اضغط لايك شارك مع اصدقاء</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="p4-tag">شعار فرعي (Tag)</label>
+                            <input type="text" id="p4-tag2" value="سجل الآن" placeholder="مثال: جربها الآن">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. خيارات التصميم (اللون الكريمي الأبيض) -->
+                <div class="sidebar-card">
+                    <h3 class="card-title"><i class="ri-palette-line"></i> تخصيص درجات الأبيض الكريمي</h3>
+                    
+                    <div class="theme-selector-grid">
+                        <button class="theme-btn active" data-bg="#FAF6F0" data-text="#1A1A1A" data-accent="#C5A880" style="background-color: #FAF6F0; color: #1A1A1A;">
+                            كريمي دافئ
+                        </button>
+                        <button class="theme-btn" data-bg="#F5EFEB" data-text="#2D2D2D" data-accent="#8E7C68" style="background-color: #F5EFEB; color: #2D2D2D;">
+                            رمال ناعمة
+                        </button>
+                        <button class="theme-btn" data-bg="#FFFDF0" data-text="#1E1E1E" data-accent="#B3925D" style="background-color: #FFFDF0; color: #1E1E1E;">
+                            ياقوت عاجي
+                        </button>
+                        <button class="theme-btn" data-bg="#FFFFFF" data-text="#111111" data-accent="#0077FF" style="background-color: #FFFFFF; color: #111111;">
+                            أبيض ناصع
+                        </button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="card-shadow-slider">قوة ظلال الكروت الراقية</label>
+                        <input type="range" id="card-shadow-slider" min="0" max="3" value="1" step="1">
+                        <div class="slider-labels">
+                            <span>بدون</span>
+                            <span>خفيفة</span>
+                            <span>متوسطة</span>
+                            <span>طافية</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-radius-slider">استدارة زوايا الكروت</label>
+                        <input type="range" id="card-radius-slider" min="0" max="30" value="16" step="2">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="card-size-select">أبعاد ومقاس المنشور (Social Media Size)</label>
+                        <select id="card-size-select">
+                            <option value="ratio-1-1" selected>🟥 مربع (1:1) - LinkedIn / Instagram Carousel</option>
+                            <option value="ratio-4-5">📊 بورتريه (4:5) - Instagram Feed / Facebook</option>
+                            <option value="ratio-9-16">📱 طولي / ريلز (9:16) - Story / TikTok / Shorts</option>
+                            <option value="ratio-16-9">🖥️ أفقي (16:9) - Twitter / X / YouTube</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 4. روابط سريعة للموقع والأداة -->
+                <div class="sidebar-card action-card">
+                    <h3 class="card-title"><i class="ri-link-m"></i> صفحة الأداة والشرح</h3>
+                    <p class="text-sm">قمنا بإنشاء صفحة هبوط إبداعية متكاملة ومستقلة تحتوي على الأداة بالشرح الحصري باسمك وصورتك الشخصية.</p>
+                    <a href="tool.html" target="_blank" class="btn-link-tool">
+                        <i class="ri-external-link-line"></i>
+                        <span>عرض صفحة الأداة والشرح (tool.html)</span>
+                    </a>
+                    
+                    <button id="btn-copy-manychat-link" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 10px; font-size: 13px; background: rgba(0, 119, 255, 0.1); color: var(--accent-blue); border-color: rgba(0, 119, 255, 0.2); transition: all 0.3s ease;">
+                        <i class="ri-robot-line"></i>
+                        <span>نسخ رابط الأداة لـ ManyChat 🤖</span>
+                    </button>
+                </div>
+
+                <!-- 5. الكابشن والهاشتاجات المولدة الجاهزة للنشر -->
+                <div class="sidebar-card" id="ai-caption-card" style="display: none; border: 1px dashed rgba(197, 168, 128, 0.3); background: rgba(197, 168, 128, 0.02);">
+                    <h3 class="card-title"><i class="ri-chat-quote-line"></i> كابشن وهاشتاجات شبكات التواصل</h3>
+                    <p class="text-sm" style="margin-bottom: 10px;">تم توليد كابشن جاهز ومقالات وهاشتاجات مخصصة للأداة لتنسخها وتنشرها مع الكروت فوراً!</p>
+                    
+                    <div class="form-group">
+                        <textarea id="ai-caption-output" rows="8" readonly style="background: rgba(0,0,0,0.15); border-color: rgba(255,255,255,0.05); color: #fff; font-size: 12px; line-height: 1.5; direction: rtl; font-family: 'Cairo', sans-serif; resize: none;"></textarea>
+                    </div>
+                    
+                    <button class="btn-secondary" id="btn-copy-caption" style="width: 100%; justify-content: center; margin-top: 10px; font-size: 12px;">
+                        <i class="ri-file-copy-2-line"></i>
+                        <span>نسخ الكابشن والهاشتاجات 📋</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- منطقة العرض المباشر للبوستات الأربعة (Live Preview) -->
+        <main class="main-content">
+            <header class="preview-header">
+                <div>
+                    <h1>معاينة البوستات الأربعة المباشرة</h1>
+                    <p class="text-muted">شاهد كيف تبدو منشوراتك الراقية بدقة عالية ومظهر الأبيض الكريمي الفخم.</p>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn-secondary" id="btn-export-single" title="تحميل الكارت النشط حالياً">
+                        <i class="ri-image-line"></i>
+                        <span>تحميل الكارت النشط</span>
+                    </button>
+                    <button class="btn-primary" id="btn-export-all">
+                        <i class="ri-download-cloud-2-line"></i>
+                        <span>تحميل الـ 4 كروت معاً (PNG)</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- الكروت الأربعة - الكاروسيل الفعلي -->
+            <div class="carousel-preview-container">
+                
+                <!-- كارت 1: الأداة -->
+                <div class="carousel-card active-card" id="post-card-1" data-slide="1">
+                    <!-- رأس الكارت: الملف الشخصي والتوثيق -->
+                    <div class="card-header-profile">
+                        <div class="profile-left">
+                            <img class="user-avatar-img" src="personal_photo.png" alt="هيثم إبراهيم">
+                            <div class="profile-info-text">
+                                <div class="name-badge-wrapper">
+                                    <span class="user-display-name">هيثم إبراهيم</span>
+                                    <i class="ri-checkbox-circle-fill verified-badge-icon" id="card-verified-1"></i>
+                                </div>
+                                <span class="user-handle-text">@haytham_ibrahim</span>
+                            </div>
+                        </div>
+                        <i class="ri-more-line card-menu-dots"></i>
+                    </div>
+
+                    <!-- محتوى الكارت -->
+                    <div class="card-body">
+                        <div class="card-tag-wrapper">
+                            <span class="card-tag" id="card-1-tag">أدوات ذكية</span>
+                        </div>
+                        
+                        <h2 class="card-headline-title" id="card-1-title">مساعد الذكاء الاصطناعي الخارق 🚀</h2>
+                        
+                        <div class="card-main-image-container">
+                            <img id="card-1-image-element" src="tool_example_mockup.png" alt="توضيح عمل الأداة" class="card-main-image">
+                            <!-- عنصر مخفي للمحافظة على توافق منطق الجافاسكريبت للأيقونات -->
+                            <i id="card-1-icon-element" style="display: none;"></i>
+                        </div>
+
+                        <p class="card-description-text" id="card-1-desc">الأداة الثورية التي تختصر عليك ساعات من العمل الشاق وتنجز مهامك بضغطة زر واحدة بالذكاء الاصطناعي المطور.</p>
+                    </div>
+
+                    <!-- ذيل الكارت: التفاعل والمؤشر -->
+                    <div class="card-footer">
+                        <div class="interactive-icons">
+                            <i class="ri-heart-3-line"></i>
+                            <i class="ri-chat-3-line"></i>
+                            <i class="ri-share-forward-line"></i>
+                        </div>
+                        <div class="slide-indicator">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- كارت 2: الشرح -->
+                <div class="carousel-card" id="post-card-2" data-slide="2">
+                    <div class="card-header-profile">
+                        <div class="profile-left">
+                            <img class="user-avatar-img" src="personal_photo.png" alt="هيثم إبراهيم">
+                            <div class="profile-info-text">
+                                <div class="name-badge-wrapper">
+                                    <span class="user-display-name">هيثم إبراهيم</span>
+                                    <i class="ri-checkbox-circle-fill verified-badge-icon" id="card-verified-2"></i>
+                                </div>
+                                <span class="user-handle-text">@haytham_ibrahim</span>
+                            </div>
+                        </div>
+                        <i class="ri-more-line card-menu-dots"></i>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-tag-wrapper">
+                            <span class="card-tag">الشرح المفصل</span>
+                        </div>
+                        
+                        <h2 class="card-headline-title" id="card-2-title">ما هي هذه الأداة وبماذا تفيدك؟ 🤔</h2>
+                        
+                        <div class="card-points-list">
+                            <div class="card-point-item">
+                                <div class="point-icon"><i class="ri-checkbox-circle-line"></i></div>
+                                <p id="card-2-p1">توليد فوري ومؤتمت للمحتوى الاحترافي بدون خبرة سابقة</p>
+                            </div>
+                            <div class="card-point-item">
+                                <div class="point-icon"><i class="ri-checkbox-circle-line"></i></div>
+                                <p id="card-2-p2">توفير أكثر من 70% من الوقت والجهد المبذول في التصميم والتفكير</p>
+                            </div>
+                            <div class="card-point-item">
+                                <div class="point-icon"><i class="ri-checkbox-circle-line"></i></div>
+                                <p id="card-2-p3">خوارزميات ذكية متوافقة تماماً مع معايير السيو والانتشار السريع</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="interactive-icons">
+                            <i class="ri-heart-3-line"></i>
+                            <i class="ri-chat-3-line"></i>
+                            <i class="ri-share-forward-line"></i>
+                        </div>
+                        <div class="slide-indicator">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- كارت 3: الطريقة -->
+                <div class="carousel-card" id="post-card-3" data-slide="3">
+                    <div class="card-header-profile">
+                        <div class="profile-left">
+                            <img class="user-avatar-img" src="personal_photo.png" alt="هيثم إبراهيم">
+                            <div class="profile-info-text">
+                                <div class="name-badge-wrapper">
+                                    <span class="user-display-name">هيثم إبراهيم</span>
+                                    <i class="ri-checkbox-circle-fill verified-badge-icon" id="card-verified-3"></i>
+                                </div>
+                                <span class="user-handle-text">@haytham_ibrahim</span>
+                            </div>
+                        </div>
+                        <i class="ri-more-line card-menu-dots"></i>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-tag-wrapper">
+                            <span class="card-tag">خطوات الاستخدام</span>
+                        </div>
+                        
+                        <h2 class="card-headline-title" id="card-3-title">طريقة الاستخدام بثلاث خطوات بسيطة 🛠️</h2>
+                        
+                        <div class="card-steps-vertical">
+                            <div class="card-step-item">
+                                <div class="step-num-badge">1</div>
+                                <p id="card-3-s1">قم بالدخول إلى رابط الأداة الرسمي الموضح في البوست القادم</p>
+                            </div>
+                            <div class="card-step-item">
+                                <div class="step-num-badge">2</div>
+                                <p id="card-3-s2">اكتب فكرتك أو مشروعك ودع الذكاء الاصطناعي يقوم بالسحر فوراً</p>
+                            </div>
+                            <div class="card-step-item">
+                                <div class="step-num-badge">3</div>
+                                <p id="card-3-s3">احفظ النتيجة بنقرة واحدة وشاركها مع أصدقائك ومتابعيك بكل سهولة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="interactive-icons">
+                            <i class="ri-heart-3-line"></i>
+                            <i class="ri-chat-3-line"></i>
+                            <i class="ri-share-forward-line"></i>
+                        </div>
+                        <div class="slide-indicator">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- كارت 4: الرابط والدعوة التفاعلية -->
+                <div class="carousel-card" id="post-card-4" data-slide="4">
+                    <div class="card-header-profile">
+                        <div class="profile-left">
+                            <img class="user-avatar-img" src="personal_photo.png" alt="هيثم إبراهيم">
+                            <div class="profile-info-text">
+                                <div class="name-badge-wrapper">
+                                    <span class="user-display-name">هيثم إبراهيم</span>
+                                    <i class="ri-checkbox-circle-fill verified-badge-icon" id="card-verified-4"></i>
+                                </div>
+                                <span class="user-handle-text">@haytham_ibrahim</span>
+                            </div>
+                        </div>
+                        <i class="ri-more-line card-menu-dots"></i>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-tag-wrapper">
+                            <span class="card-tag" id="card-4-tag">جربها الآن</span>
+                        </div>
+                        
+                        <h2 class="card-headline-title" id="card-4-title">ابدأ الآن مجاناً ووفّر وقتك! 🔗</h2>
+                        
+                        <!-- تصميم كارت الرابط الفاخر -->
+                        <div class="card-link-container" style="display: none;">
+                            <i class="ri-global-line link-globe-icon"></i>
+                            <span class="link-url-display" id="card-4-link-display">www.haythamtech.com/tool</span>
+                        </div>
+
+                        <!-- العبارة التفاعلية الكبيرة المطلوبة -->
+                        <div class="card-cta-box">
+                            <p id="card-4-cta-text">احفظ الفيديو وتابعنى لتعرف كل جديد اضغط لايك شارك مع اصدقاء</p>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="interactive-icons">
+                            <i class="ri-heart-3-line"></i>
+                            <i class="ri-chat-3-line"></i>
+                            <i class="ri-share-forward-line"></i>
+                        </div>
+                        <div class="slide-indicator">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- أزرار الانتقال لكروت المعاينة -->
+            <div class="carousel-navigation-buttons">
+                <button class="nav-btn prev-btn" id="btn-prev-slide"><i class="ri-arrow-right-s-line"></i> الكارت السابق</button>
+                <div class="nav-dots" id="carousel-dots-container">
+                    <span class="nav-dot active-dot" data-slide="1"></span>
+                    <span class="nav-dot" data-slide="2"></span>
+                    <span class="nav-dot" data-slide="3"></span>
+                    <span class="nav-dot" data-slide="4"></span>
+                </div>
+                <button class="nav-btn next-btn" id="btn-next-slide">الكارت التالي <i class="ri-arrow-left-s-line"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <!-- تذييل الصفحة الاحترافي -->
+    <footer class="app-footer">
+        <div class="footer-socials">
+            <a href="https://instagram.com" target="_blank" class="footer-social-icon instagram"><i class="ri-instagram-line"></i></a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-icon youtube"><i class="ri-youtube-line"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-icon linkedin"><i class="ri-linkedin-box-line"></i></a>
+            <a href="https://twitter.com" target="_blank" class="footer-social-icon twitter-x"><i class="ri-twitter-x-line"></i></a>
+        </div>
+        <p>نظام مولد البوستات الاحترافي للأستاذ <strong>هيثم إبراهيم</strong>. تم التصميم والتطوير بأسلوب فني إبداعي ومبهر.</p>
+    </footer>
+
+    <!-- استدعاء المنطق البرمجي -->
+    <!-- مكتبة JSZip لتحميل الكروت في ملف مضغوط لتخطي حظر المتصفح -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

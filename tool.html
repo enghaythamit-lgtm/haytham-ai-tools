@@ -13,6 +13,76 @@
     <!-- أيقونات RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
+    <style id="cinematic-theme-override">
+        /* --- Cinematic Dark Theme Override --- */
+        :root {
+            --bg-cream: #0B0E14 !important;
+            --bg-cream-dark: #121822 !important;
+            --text-dark: #FFFFFF !important;
+            --text-muted: #A0ABC0 !important;
+            --accent-gold: #FFD700 !important;
+            --accent-gold-dark: #B8860B !important;
+            --accent-blue: #00E5FF !important;
+        }
+        body {
+            background-color: var(--bg-cream) !important;
+            color: var(--text-dark) !important;
+        }
+        /* كروت الواجهة والمربعات */
+        .interactive-tool-card, .feature-card, .timeline-content-card, .download-main-card, .comment-card, .glass-card {
+            background: #141A23 !important;
+            border-color: rgba(255,255,255,0.05) !important;
+            color: #fff !important;
+        }
+        .profile-badge-nav {
+            background: #141A23 !important;
+            border-color: rgba(255,255,255,0.05) !important;
+            color: #fff !important;
+        }
+        .author-verified-badge {
+            background: #141A23 !important;
+        }
+        .editor-textarea, .comment-input {
+            background: #0B0E14 !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+        .editor-output-group {
+            background: #121822 !important;
+            border-color: rgba(255,215,0,0.2) !important;
+        }
+        .output-text-area {
+            color: #fff !important;
+        }
+        .format-btn {
+            background: #121822 !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+        header {
+            background: rgba(11, 14, 20, 0.8) !important;
+            border-bottom-color: rgba(255,255,255,0.05) !important;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        /* تأثيرات الخلفية */
+        .blob-1 { background: #1A2235 !important; }
+        .blob-2 { background: #2A2315 !important; }
+        
+        /* تعديلات نصوص إضافية */
+        h1, h2, h3, h4, h5, h6 { color: #fff !important; }
+        .feature-card h3, .timeline-content-card h4, .download-main-card h3 { color: #FFD700 !important; }
+        .timeline-badge { background: #121822 !important; border-color: #0B0E14 !important; color: #00E5FF !important; }
+        .comment-author-name { color: #FFD700 !important; }
+        
+        /* أزرار الحفظ والنشر */
+        .cta-hero-btn { background: #FFD700 !important; color: #111 !important; font-weight: 900 !important; }
+        .cta-hero-btn:hover { background: #FFFFFF !important; box-shadow: 0 0 20px rgba(255,215,0,0.4) !important; }
+    </style>
+
     <style>
         /* --- تنسيقات التصميم الكريمي الفخم لصفحة الشرح --- */
         :root {

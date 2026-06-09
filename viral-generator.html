@@ -165,11 +165,53 @@
                     </div>
                 </div>
 
+            <!-- استوديو إنتاج الفيديو الفيروسي -->
+            <div class="content-header" style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 30px;">
+                <div class="header-titles">
+                    <h2><i class="ri-movie-2-line"></i> استوديو توليد الفيديو (AI Video)</h2>
+                    <p>قم بإنشاء فيديو جاهز للرفع (Reels / TikTok) يحتوي على أنيميشن وموسيقى فيروسية.</p>
+                </div>
             </div>
+
+            <div class="viral-studio-container">
+                <!-- شاشة الهاتف الذكي للعرض المسبق (Canvas) -->
+                <div class="mobile-preview-frame">
+                    <canvas id="video-canvas" width="540" height="960"></canvas>
+                    <div class="preview-overlay" id="preview-overlay">
+                        <i class="ri-play-circle-line"></i>
+                        <span>اضغط لإنشاء ومعاينة الفيديو</span>
+                    </div>
+                </div>
+
+                <!-- إعدادات الإنتاج وأزرار التحميل -->
+                <div class="studio-controls">
+                    <div class="form-group">
+                        <label>اختر الموسيقى الفيروسية (MP3)</label>
+                        <input type="file" id="audio-upload" accept="audio/mp3, audio/wav" class="custom-file-input">
+                        <small style="color: var(--text-secondary); margin-top: 5px; display: block;">* قم بتحميل ملف الموسيقى من يوتيوب وارفعها هنا ليتم دمجها في الفيديو.</small>
+                    </div>
+                    
+                    <audio id="bg-audio" style="display: none;"></audio>
+
+                    <button id="btn-render-video" class="btn-generate-ai" style="margin-top: 20px;">
+                        <i class="ri-video-add-line"></i> إنشاء ومعاينة الفيديو
+                    </button>
+
+                    <button id="btn-download-video" class="btn-export" style="width: 100%; margin-top: 10px; display: none; background: #25D366; color: white;">
+                        <i class="ri-download-cloud-2-line"></i> تحميل الفيديو (WebM)
+                    </button>
+                    
+                    <div id="render-progress" style="display: none; margin-top: 15px; color: var(--accent-gold); font-family: 'Cairo';">
+                        <i class="ri-loader-4-line ri-spin"></i> جاري معالجة إطارات الفيديو... <span id="progress-text">0%</span>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
     <!-- استدعاء المنطق البرمجي للقسم الفيروسي -->
     <script src="js/viral.js"></script>
+    <script src="js/video-renderer.js"></script>
 </body>
 </html>

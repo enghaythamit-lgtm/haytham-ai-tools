@@ -21,6 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const FPS = 30;
     const VIDEO_DURATION = 15; // 15 seconds
     
+    // نظام الجزيئات السينمائية (Particles)
+    let particles = [];
+    for(let i = 0; i < 40; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedY: Math.random() * 1 + 0.2,
+            speedX: (Math.random() - 0.5) * 0.5,
+            opacity: Math.random() * 0.5 + 0.1
+        });
+    }
+
     // إعداد الصوت عند تحميل ملف
     audioUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -30,92 +43,166 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // دالة رسم الإطار (Frame)
+    // دالة رسم الإطار (Cinematic Frame)
     function drawFrame(timeSeconds, toolName, audience, triggerWord) {
-        // 1. الخلفية (متدرجة وداكنة وفخمة)
-        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        // تغيير لون الخلفية تدريجياً بمرور الوقت لإعطاء حركة
-        const g1 = Math.floor(20 + Math.sin(timeSeconds) * 10);
-        const g2 = Math.floor(40 + Math.cos(timeSeconds) * 10);
-        gradient.addColorStop(0, `rgb(${g1}, ${g1}, ${g1})`);
-        gradient.addColorStop(1, `rgb(${g2}, ${g2}, ${g2})`);
+        
+        // 1. الخلفية السينمائية (Dark Cinematic Vignette)
+        const gradient = ctx.createRadialGradient(
+            canvas.width/2, canvas.height/2, 50, 
+            canvas.width/2, canvas.height/2, canvas.height
+        );
+        // لون أزرق منتصف الليل داكن جداً يميل للأسود
+        gradient.addColorStop(0, '#111827'); 
+        gradient.addColorStop(1, '#030712');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // 2. العناصر الزخرفية (دوائر تطفو)
-        ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
-        for (let i = 0; i < 5; i++) {
-            const yPos = (canvas.height + Math.sin(timeSeconds * 2 + i) * 100) % canvas.height;
+        // 2. تحديث ورسم الجزيئات المضيئة (Cinematic Dust/Bokeh)
+        ctx.save();
+        particles.forEach(p => {
+            p.y -= p.speedY;
+            p.x += p.speedX;
+            if(p.y < 0) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+            
             ctx.beginPath();
-            ctx.arc(canvas.width / 2 + Math.cos(timeSeconds + i) * 100, yPos, 30 + i * 10, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity * (0.5 + Math.sin(timeSeconds * 3 + p.x)*0.5)})`;
+            ctx.shadowColor = '#D4AF37';
+            ctx.shadowBlur = 10;
             ctx.fill();
+        });
+        ctx.restore();
+
+        // 3. الفلاش السينمائي عند انتقال المشاهد (الثانية 5 و 10)
+        if ((timeSeconds > 4.9 && timeSeconds < 5.2) || (timeSeconds > 9.9 && timeSeconds < 10.2)) {
+            let flashOpacity = Math.max(0, 1 - Math.abs(Math.sin(timeSeconds * 10)));
+            ctx.fillStyle = `rgba(255, 255, 255, ${flashOpacity * 0.3})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        // 3. كتابة النص بناءً على توقيت الفيديو
+        // 4. المشاهد السينمائية
         if (timeSeconds < 5) {
-            // المشهد الأول: الخطاف
-            ctx.fillStyle = '#D4AF37'; // ذهبي
-            ctx.font = 'bold 40px Cairo';
+            // المشهد الأول: الخطاف بانبثاق وتوهج (Neon Glow)
+            let fadeIn = Math.min(1, timeSeconds * 2); // 0.5s fade
             
-            // أنيميشن تكبير تدريجي
-            let scale = Math.min(1, timeSeconds * 2);
             ctx.save();
-            ctx.translate(canvas.width / 2, canvas.height / 2 - 50);
+            ctx.globalAlpha = fadeIn;
+            
+            // الكلمة السرية (توهج ذهبي)
+            ctx.fillStyle = '#D4AF37';
+            ctx.shadowColor = '#D4AF37';
+            ctx.shadowBlur = 25;
+            ctx.font = 'bold 45px Cairo';
+            
+            let scale = 1 + Math.sin(timeSeconds * 2) * 0.05; // نبض خفيف بطيء
+            ctx.translate(canvas.width / 2, canvas.height / 2 - 80);
             ctx.scale(scale, scale);
             ctx.fillText('أداة سرية', 0, 0);
             ctx.restore();
 
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 30px Cairo';
-            ctx.globalAlpha = Math.min(1, Math.max(0, timeSeconds - 0.5));
-            wrapText(ctx, `ستغير حياتك كـ ${audience}! 🤯`, canvas.width / 2, canvas.height / 2 + 30, 480, 45);
-            ctx.globalAlpha = 1;
-
-        } else if (timeSeconds >= 5 && timeSeconds < 10) {
-            // المشهد الثاني: اسم الأداة
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 35px Cairo';
-            ctx.fillText('اسم الأداة هو:', canvas.width / 2, canvas.height / 2 - 60);
-
-            // مربع خلف الأداة
-            ctx.fillStyle = 'rgba(212, 175, 55, 0.2)';
-            ctx.fillRect(40, canvas.height / 2 - 20, 460, 80);
-
-            ctx.fillStyle = '#D4AF37';
-            ctx.font = 'bold 50px Alexandria';
-            ctx.fillText(toolName, canvas.width / 2, canvas.height / 2 + 20);
-
-        } else if (timeSeconds >= 10) {
-            // المشهد الثالث: الـ CTA (ManyChat)
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 35px Cairo';
-            wrapText(ctx, 'للحصول على الرابط والشرح المجاني', canvas.width / 2, canvas.height / 2 - 80, 480, 45);
-
-            ctx.fillStyle = '#D4AF37';
-            ctx.font = 'bold 45px Cairo';
-            ctx.fillText('اكتب كلمة:', canvas.width / 2, canvas.height / 2);
-
-            // أنيميشن نبض للكلمة
-            let pulse = 1 + Math.sin(timeSeconds * 10) * 0.1;
+            // باقي النص بانسيابية من الأسفل
             ctx.save();
-            ctx.translate(canvas.width / 2, canvas.height / 2 + 80);
-            ctx.scale(pulse, pulse);
-            ctx.fillStyle = '#25D366'; // لون واتساب/أخضر للأتمتة
-            ctx.fillText(`"${triggerWord}"`, 0, 0);
+            let yOffset = Math.max(0, 30 - timeSeconds * 30); // Slide up effect
+            ctx.translate(0, yOffset);
+            ctx.globalAlpha = Math.min(1, Math.max(0, timeSeconds - 0.5));
+            ctx.fillStyle = '#F3F4F6'; // أبيض ناصع
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+            ctx.shadowBlur = 10;
+            ctx.font = 'bold 32px Cairo';
+            wrapText(ctx, `ستغير حياتك كـ ${audience}! 🤯`, canvas.width / 2, canvas.height / 2 + 20, 480, 50);
             ctx.restore();
 
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = '25px Cairo';
-            ctx.fillText('في التعليقات وسأرسله لك فوراً! 📩', canvas.width / 2, canvas.height / 2 + 160);
+        } else if (timeSeconds >= 5 && timeSeconds < 10) {
+            // المشهد الثاني: استعراض اسم الأداة بفخامة
+            let sceneTime = timeSeconds - 5;
+            let fadeIn = Math.min(1, sceneTime * 2);
+            
+            ctx.save();
+            ctx.globalAlpha = fadeIn;
+            ctx.fillStyle = '#D1D5DB';
+            ctx.font = 'bold 30px Cairo';
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+            ctx.shadowBlur = 5;
+            ctx.fillText('السر يكمن في أداة:', canvas.width / 2, canvas.height / 2 - 80);
+            
+            // مستطيل زجاجي خلف اسم الأداة (Glassmorphism Effect)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.roundRect(30, canvas.height / 2 - 30, 480, 100, 20);
+            ctx.fill();
+            ctx.stroke();
+
+            // اسم الأداة بتوهج درامي
+            ctx.fillStyle = '#D4AF37';
+            ctx.shadowColor = '#D4AF37';
+            ctx.shadowBlur = 30 + Math.sin(sceneTime * 5) * 15; // توهج نابض
+            ctx.font = 'bold 55px Alexandria';
+            ctx.fillText(toolName, canvas.width / 2, canvas.height / 2 + 20);
+            ctx.restore();
+
+        } else if (timeSeconds >= 10) {
+            // المشهد الثالث: الـ CTA (دعوة لاتخاذ إجراء قوية)
+            let sceneTime = timeSeconds - 10;
+            let fadeIn = Math.min(1, sceneTime * 2);
+            
+            ctx.save();
+            ctx.globalAlpha = fadeIn;
+            
+            ctx.fillStyle = '#F3F4F6';
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+            ctx.shadowBlur = 10;
+            ctx.font = 'bold 32px Cairo';
+            wrapText(ctx, 'للحصول على الرابط والشرح المجاني', canvas.width / 2, canvas.height / 2 - 100, 480, 45);
+
+            // زر وهمي للتعليق
+            ctx.fillStyle = 'rgba(37, 211, 102, 0.15)'; // لون واتساب باهت
+            ctx.strokeStyle = '#25D366';
+            ctx.lineWidth = 3;
+            let pulse = 1 + Math.sin(sceneTime * 8) * 0.05;
+            ctx.translate(canvas.width / 2, canvas.height / 2 + 10);
+            ctx.scale(pulse, pulse);
+            ctx.roundRect(-150, -45, 300, 90, 45);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#25D366';
+            ctx.shadowColor = '#25D366';
+            ctx.shadowBlur = 20;
+            ctx.font = 'bold 40px Cairo';
+            ctx.fillText(`اكتب "${triggerWord}"`, 0, 0);
+            ctx.restore();
+
+            ctx.save();
+            ctx.globalAlpha = Math.min(1, Math.max(0, sceneTime - 1));
+            ctx.fillStyle = '#D1D5DB';
+            ctx.font = '24px Cairo';
+            ctx.fillText('في التعليقات وسأرسله فوراً! 📩', canvas.width / 2, canvas.height / 2 + 120);
+            ctx.restore();
         }
 
-        // علامة مائية
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-        ctx.font = '20px Alexandria';
-        ctx.fillText('@haytham_ibrahim', canvas.width / 2, canvas.height - 40);
+        // علامة مائية سينمائية
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.font = '18px Alexandria';
+        ctx.letterSpacing = '2px';
+        ctx.fillText('HAYTHAM IBRAHIM', canvas.width / 2, canvas.height - 40);
+    }
+
+    // إضافة دعم رسم المستطيل بحواف دائرية للـ Canvas
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+        if (w < 2 * r) r = w / 2;
+        if (h < 2 * r) r = h / 2;
+        this.beginPath();
+        this.moveTo(x+r, y);
+        this.arcTo(x+w, y,   x+w, y+h, r);
+        this.arcTo(x+w, y+h, x,   y+h, r);
+        this.arcTo(x,   y+h, x,   y,   r);
+        this.arcTo(x,   y,   x+w, y,   r);
+        this.closePath();
+        return this;
     }
 
     // دالة مساعدة لتقطيع النص إلى أسطر

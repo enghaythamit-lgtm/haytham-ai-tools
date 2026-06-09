@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // توليد الصورة عبر html2canvas
         html2canvas(clone, {
-            scale: 3, // جودة فائقة 3x
+            scale: 4, // جودة فائقة جداً (4x) لضمان عدم فقدان أي بكسل
             useCORS: true,
             allowTaint: true,
             backgroundColor: null
@@ -345,16 +345,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // تحميل الكروت الأربعة معاً كملف مضغوط (ZIP) دفعة واحدة بطريقة آمنة
+    // تحميل الكروت الأربعة كصور منفصلة (بدون ملف مضغوط ZIP)
     btnExportAll.addEventListener('click', async () => {
         btnExportAll.disabled = true;
         const originalText = btnExportAll.innerHTML;
-        btnExportAll.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> جاري تجهيز الملف المضغوط (ZIP)...';
+        btnExportAll.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> جاري تحميل الكروت بأعلى جودة...';
 
         try {
-            const zip = new JSZip();
-            
-            // استخراج الصور وإضافتها للملف المضغوط
             for (let i = 0; i < cards.length; i++) {
                 const cardElement = cards[i];
                 
@@ -371,9 +368,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 document.body.appendChild(clone);
                 
-                // توليد الصورة
+                // توليد الصورة بجودة مضاعفة 4 مرات
                 const canvas = await html2canvas(clone, {
-                    scale: 3,
+                    scale: 4,
                     useCORS: true,
                     allowTaint: true,
                     backgroundColor: null
@@ -382,21 +379,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 // إزالة المستنسخ
                 document.body.removeChild(clone);
                 
-                // تحويل الصورة إلى base64 وإضافتها للـ ZIP
-                const imgData = canvas.toDataURL('image/png').split('base64,')[1];
-                zip.file(`haytham_post_slide_${i + 1}.png`, imgData, {base64: true});
+                // تحميل الصورة فوراً
+                const link = document.createElement('a');
+                link.download = `haytham_carousel_slide_${i + 1}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                // إضافة تأخير بسيط (نصف ثانية) لتجنب حظر المتصفح للتحميل المتعدد
+                await new Promise(resolve => setTimeout(resolve, 500));
             }
-            
-            // توليد ملف الـ ZIP وتحميله
-            const content = await zip.generateAsync({type: 'blob'});
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(content);
-            link.download = 'haytham_carousel_posts.zip';
-            link.click();
             
             btnExportAll.innerHTML = '<i class="ri-checkbox-circle-fill"></i> تم التحميل بنجاح';
         } catch (err) {
-            console.error('حدث خطأ أثناء إنشاء ملف ZIP:', err);
+            console.error('حدث خطأ أثناء تصدير الصور:', err);
             alert('عذراً، حدث خطأ أثناء تجميع الصور. يرجى المحاولة مرة أخرى.');
             btnExportAll.innerHTML = originalText;
         } finally {

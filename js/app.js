@@ -269,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // التحكم بأبعاد ومقاس الكروت لشبكات التواصل الاجتماعي
-    // تهيئة المقاس المربع الافتراضي لكافة الكروت
     cards.forEach(card => card.classList.add('ratio-1-1'));
     
     cardSizeSelect.addEventListener('change', (e) => {
@@ -281,30 +280,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 6. منطق تحميل الكروت كصور عالية الدقة (Export System) ---
-    
-    // تحميل كارت واحد محدد
+
+
+    // دالة تصدير كارت معين كصورة باستخدام تقنية الاستنساخ (Clone) لحل مشكلة القص
     function exportCard(cardElement, filename) {
-        if (!cardElement) return;
+        // استنساخ الكارت حتى لا نؤثر على العرض الأساسي
+        const clone = cardElement.cloneNode(true);
         
-        // إظهار الكارت مؤقتاً وبدقة عالية للتصدير دون التأثير على التصميم المتجاوب
-        const originalStyle = cardElement.style.cssText;
+        // إعداد المستنسخ ليكون ظاهراً تماماً لمكتبة التصوير ولكن خارج الشاشة
+        clone.style.position = 'fixed';
+        clone.style.top = '0';
+        clone.style.left = '0';
+        clone.style.zIndex = '-9999';
+        clone.style.opacity = '1';
+        clone.style.transform = 'none';
+        clone.style.display = 'flex';
+        clone.style.margin = '0';
         
-        // تهيئة الكارت لوضع التصدير
-        cardElement.style.position = 'relative';
-        cardElement.style.opacity = '1';
-        cardElement.style.transform = 'none';
-        cardElement.style.display = 'flex';
-        cardElement.style.zIndex = '9999';
+        document.body.appendChild(clone);
         
         // توليد الصورة عبر html2canvas
-        html2canvas(cardElement, {
-            scale: 3, // مضاعفة الدقة 3 مرات لتكون مناسبة بجودة خارقة للينكد إن وإنستغرام
+        html2canvas(clone, {
+            scale: 3, // جودة فائقة 3x
             useCORS: true,
             allowTaint: true,
             backgroundColor: null
         }).then(canvas => {
-            // إعادة الكارت لحالته الطبيعية فوراً
-            cardElement.style.cssText = originalStyle;
+            // إزالة المستنسخ بعد الانتهاء
+            document.body.removeChild(clone);
             
             // تحميل ملف الصورة
             const link = document.createElement('a');
@@ -313,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.click();
         }).catch(err => {
             console.error('حدث خطأ أثناء توليد الصورة:', err);
-            cardElement.style.cssText = originalStyle;
+            if (document.body.contains(clone)) document.body.removeChild(clone);
             alert('عذراً، حدث خطأ أثناء محاولة تصدير الصورة. يرجى المحاولة مرة أخرى.');
         });
     }
@@ -327,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // تحميل الكروت الأربعة معاً كملف مضغوط (ZIP) دفعة واحدة لتخطي قيود حظر المتصفحات
+    // تحميل الكروت الأربعة معاً كملف مضغوط (ZIP) دفعة واحدة بطريقة آمنة
     btnExportAll.addEventListener('click', async () => {
         btnExportAll.disabled = true;
         const originalText = btnExportAll.innerHTML;
@@ -339,25 +342,30 @@ document.addEventListener('DOMContentLoaded', () => {
             // استخراج الصور وإضافتها للملف المضغوط
             for (let i = 0; i < cards.length; i++) {
                 const cardElement = cards[i];
-                const originalStyle = cardElement.style.cssText;
                 
-                // تهيئة الكارت لوضع التصدير
-                cardElement.style.position = 'relative';
-                cardElement.style.opacity = '1';
-                cardElement.style.transform = 'none';
-                cardElement.style.display = 'flex';
-                cardElement.style.zIndex = '9999';
+                // استنساخ الكارت
+                const clone = cardElement.cloneNode(true);
+                clone.style.position = 'fixed';
+                clone.style.top = '0';
+                clone.style.left = '0';
+                clone.style.zIndex = '-9999';
+                clone.style.opacity = '1';
+                clone.style.transform = 'none';
+                clone.style.display = 'flex';
+                clone.style.margin = '0';
+                
+                document.body.appendChild(clone);
                 
                 // توليد الصورة
-                const canvas = await html2canvas(cardElement, {
+                const canvas = await html2canvas(clone, {
                     scale: 3,
                     useCORS: true,
                     allowTaint: true,
                     backgroundColor: null
                 });
                 
-                // إعادة الكارت لحالته الطبيعية
-                cardElement.style.cssText = originalStyle;
+                // إزالة المستنسخ
+                document.body.removeChild(clone);
                 
                 // تحويل الصورة إلى base64 وإضافتها للـ ZIP
                 const imgData = canvas.toDataURL('image/png').split('base64,')[1];

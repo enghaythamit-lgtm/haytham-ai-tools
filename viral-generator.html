@@ -66,10 +66,15 @@
                     <h3 class="card-title"><i class="ri-settings-4-line"></i> تفاصيل المحتوى</h3>
                     
                     <div class="form-group">
-                        <label for="viral-tool-name">اسم الأداة أو الموضوع</label>
-                        <div class="input-with-icon">
-                            <i class="ri-tools-fill"></i>
-                            <input type="text" id="viral-tool-name" placeholder="مثال: أداة Midjourney للتصميم">
+                        <label for="viral-tool-name">اسم الأداة أو الموضوع <span style="color:var(--accent-gold); font-size: 0.8rem;">(اختياري)</span></label>
+                        <div class="input-with-icon" style="display: flex; gap: 5px;">
+                            <div style="position: relative; flex-grow: 1;">
+                                <i class="ri-tools-fill" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                                <input type="text" id="viral-tool-name" placeholder="اتركه فارغاً ليختار الذكاء الاصطناعي..." style="width: 100%; padding-right: 40px; padding-left: 10px; height: 45px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white;">
+                            </div>
+                            <button id="btn-random-trend" title="توليد أداة تريند عشوائية" style="width: 45px; height: 45px; border-radius: 8px; border: none; background: rgba(212, 175, 55, 0.2); color: var(--accent-gold); cursor: pointer; transition: 0.3s; flex-shrink: 0; font-size: 1.2rem;">
+                                <i class="ri-magic-line"></i>
+                            </button>
                         </div>
                     </div>
                     

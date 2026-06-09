@@ -148,20 +148,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. مزامنة المدخلات الجانبية مع الكروت (بث مباشر Real-time) ---
     
-    // الملف الشخصي
+    // استرجاع الإعدادات المحفوظة عند فتح الصفحة
+    const savedName = localStorage.getItem('haytham_name');
+    if (savedName && usernameInput) {
+        usernameInput.value = savedName;
+        userDisplayNames.forEach(el => el.textContent = savedName);
+    }
+    
+    const savedHandle = localStorage.getItem('haytham_handle');
+    if (savedHandle && handleInput) {
+        handleInput.value = savedHandle.replace('@', ''); // نضع القيمة في المربع بدون الـ @
+        userHandleTexts.forEach(el => el.textContent = savedHandle);
+    }
+
+    // تحديث الاسم
     usernameInput.addEventListener('input', (e) => {
         const val = e.target.value.trim() || 'هيثم إبراهيم';
         userDisplayNames.forEach(el => el.textContent = val);
-        // حفظ الاسم في localStorage لربطه بصفحة الشرح
         localStorage.setItem('haytham_name', val);
     });
     
+    // تحديث المعرف
     handleInput.addEventListener('input', (e) => {
         let val = e.target.value.trim() || 'haytham_ibrahim';
         if (!val.startsWith('@') && val !== '') {
             val = '@' + val;
         }
         userHandleTexts.forEach(el => el.textContent = val);
+        // حفظ المعرف في الذاكرة
+        localStorage.setItem('haytham_handle', val);
     });
     
     verifiedToggle.addEventListener('change', (e) => {

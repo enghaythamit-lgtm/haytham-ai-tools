@@ -1751,7 +1751,8 @@
             
             // جلب البيانات من الذاكرة والشاشة
             const authorName = localStorage.getItem('haytham_name') || 'هيثم ابراهيم';
-            const outputText = document.getElementById('output-result').textContent || 'لا يوجد محتوى حالياً. يرجى توليد المحتوى أولاً.';
+            const outputElement = document.getElementById('post-formatted-output');
+            const outputText = outputElement ? outputElement.textContent : 'لا يوجد محتوى حالياً. يرجى توليد المحتوى أولاً.';
             
             // حقن البيانات في القالب الفاخر
             document.getElementById('pdf-doc-author').textContent = authorName;

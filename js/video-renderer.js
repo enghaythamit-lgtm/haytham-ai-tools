@@ -263,7 +263,29 @@ document.addEventListener('DOMContentLoaded', () => {
             ...(audioStream ? audioStream.getAudioTracks() : [])
         ]);
 
-        mediaRecorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm; codecs=vp9' });
+        // تحديد أفضل صيغة مدعومة لإنستجرام وفيسبوك (MP4 ثم WebM بترميز H264)
+        const supportedMimeTypes = [
+            'video/mp4', // مثالي (يدعمه سفاري وبعض المتصفحات)
+            'video/webm; codecs=h264', // ممتاز (ترميز H264 داخل WebM يقبله فيسبوك)
+            'video/webm; codecs=vp9',
+            'video/webm'
+        ];
+
+        let selectedMimeType = '';
+        let fileExtension = 'webm';
+
+        for (let type of supportedMimeTypes) {
+            if (MediaRecorder.isTypeSupported(type)) {
+                selectedMimeType = type;
+                if (type.includes('mp4')) {
+                    fileExtension = 'mp4';
+                }
+                break;
+            }
+        }
+
+        console.log("Using MIME type:", selectedMimeType);
+        mediaRecorder = new MediaRecorder(combinedStream, { mimeType: selectedMimeType });
         recordedChunks = [];
 
         mediaRecorder.ondataavailable = (e) => {
@@ -273,16 +295,20 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         mediaRecorder.onstop = () => {
-            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const blob = new Blob(recordedChunks, { type: selectedMimeType });
             const url = URL.createObjectURL(blob);
             btnDownload.onclick = () => {
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `Viral_Reel_${toolName}.webm`;
+                a.download = `Viral_Reel_${toolName}.${fileExtension}`;
                 a.click();
             };
+            btnDownload.innerHTML = `<i class="ri-download-cloud-2-line"></i> تحميل الفيديو (${fileExtension.toUpperCase()})`;
             btnDownload.style.display = 'block';
-            progressDiv.innerHTML = '<i class="ri-checkbox-circle-fill"></i> اكتمل إنشاء الفيديو! يمكنك تحميله الآن.';
+            
+            let extraNote = fileExtension === 'webm' ? '<br><small style="color:var(--text-secondary); font-size:12px;">* صيغة WebM مدعومة بالكامل للرفع من الكمبيوتر عبر Meta Business Suite.</small>' : '';
+            
+            progressDiv.innerHTML = `<i class="ri-checkbox-circle-fill"></i> اكتمل إنشاء الفيديو! يمكنك تحميله الآن.${extraNote}`;
             btnRender.innerHTML = '<i class="ri-refresh-line"></i> إعادة الإنشاء';
             overlay.style.display = 'flex';
         };

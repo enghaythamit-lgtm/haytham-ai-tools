@@ -1715,51 +1715,55 @@
     </script>
 
     <!-- قالب وثيقة الـ PDF الرسمي الفاخر (مخفي عن المستخدم) -->
-    <div id="pdf-export-template" style="display: none; width: 800px; padding: 50px; font-family: 'Cairo', sans-serif; direction: rtl; background: #0B0E14; color: #fff; border: 15px solid #141A23; box-sizing: border-box; position: relative; overflow: hidden;">
+    <!-- قالب وثيقة الـ PDF الرسمي الفاخر (مخفي عن المستخدم) -->
+    <div id="pdf-export-template" style="display: none; width: 794px; height: 1123px; padding: 60px 50px; font-family: 'Cairo', sans-serif; direction: rtl; background: #0B0E14; color: #fff; border: 15px solid #141A23; box-sizing: border-box; position: relative; overflow: hidden;">
         
         <!-- خلفية زخرفية -->
-        <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;"></div>
-        <div style="position: absolute; bottom: -150px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;"></div>
+        <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;"></div>
+        <div style="position: absolute; bottom: -150px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;"></div>
 
         <!-- الترويسة الفخمة -->
-        <div style="border-bottom: 2px solid rgba(255,215,0,0.3); padding-bottom: 25px; margin-bottom: 35px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2;">
+        <div style="border-bottom: 2px solid rgba(255,215,0,0.3); padding-bottom: 25px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2;">
             <div style="display: flex; align-items: center; gap: 15px;">
-                <div style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(135deg, #FFD700, #B8860B); color: #000; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(255,215,0,0.2);">
+                <div style="width: 70px; height: 70px; border-radius: 18px; background: linear-gradient(135deg, #FFD700, #B8860B); color: #000; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 5px 15px rgba(255,215,0,0.2);">
                     <i class="ri-vip-crown-fill"></i>
                 </div>
                 <div>
-                    <h1 style="margin: 0; font-size: 28px; color: #fff; font-family: 'Alexandria', sans-serif; letter-spacing: -0.5px;">الدليل الشامل للأداة</h1>
-                    <p style="margin: 5px 0 0; font-size: 15px; color: #A0ABC0;">إعداد المهندس: <span id="pdf-doc-author" style="font-weight: 800; color: #FFD700;">هيثم ابراهيم</span></p>
+                    <h1 style="margin: 0; font-size: 32px; color: #fff; font-family: 'Alexandria', sans-serif; letter-spacing: -0.5px;">الدليل الشامل للأداة</h1>
+                    <p style="margin: 5px 0 0; font-size: 16px; color: #A0ABC0;">إعداد المهندس: <span id="pdf-doc-author" style="font-weight: 800; color: #FFD700;">هيثم ابراهيم</span></p>
                 </div>
             </div>
             <div style="text-align: left;">
-                <div style="display: inline-block; padding: 8px 15px; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 30px; color: #00E5FF; font-weight: 700; font-size: 13px;">نسخة حصرية</div>
+                <div style="display: inline-block; padding: 10px 20px; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 30px; color: #00E5FF; font-weight: 700; font-size: 14px;">نسخة حصرية</div>
             </div>
         </div>
         
         <!-- المقدمة -->
-        <div style="background: rgba(255,255,255,0.03); padding: 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 30px; position: relative; z-index: 2;">
-            <h3 style="margin: 0 0 10px 0; color: #FFD700; font-size: 20px; font-weight: 800;"><i class="ri-rocket-line" style="margin-left: 8px;"></i> نظرة عامة على الأداة</h3>
-            <p id="pdf-doc-intro" style="font-size: 15px; line-height: 1.8; color: #E2E8F0; margin: 0;">(سيتم توليد المقدمة هنا تلقائياً)</p>
+        <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; position: relative; z-index: 2;">
+            <h3 style="margin: 0 0 15px 0; color: #FFD700; font-size: 22px; font-weight: 800;"><i class="ri-rocket-line" style="margin-left: 8px;"></i> نظرة عامة على الأداة</h3>
+            <p id="pdf-doc-intro" style="font-size: 17px; line-height: 1.8; color: #E2E8F0; margin: 0; text-align: justify;"></p>
         </div>
 
         <!-- الخطوات العملية -->
-        <h3 style="color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 20px; text-align: center; position: relative; z-index: 2;">خطوات التشغيل الاحترافية <span style="color: #FFD700;">خطوة بخطوة</span></h3>
+        <h3 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 30px; text-align: center; position: relative; z-index: 2;">خطوات التشغيل الاحترافية <span style="color: #FFD700;">خطوة بخطوة</span></h3>
         
-        <div id="pdf-doc-steps" style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; position: relative; z-index: 2;">
+        <div id="pdf-doc-steps" style="display: flex; flex-direction: column; gap: 25px; margin-bottom: auto; position: relative; z-index: 2;">
             <!-- سيتم حقن الخطوات هنا عبر الجافاسكريبت -->
         </div>
 
-        <!-- نصيحة سرية (Pro Tip) -->
-        <div style="background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(184,134,11,0.05) 100%); padding: 25px; border-radius: 16px; border-right: 4px solid #FFD700; position: relative; z-index: 2;">
-            <h4 style="margin: 0 0 10px 0; color: #FFD700; font-size: 18px; font-weight: 800;"><i class="ri-lightbulb-flash-fill" style="margin-left: 8px;"></i> السر الذهبي للمحترفين:</h4>
-            <p id="pdf-doc-tip" style="font-size: 15px; line-height: 1.8; color: #E2E8F0; margin: 0;">(نصيحة تلقائية)</p>
-        </div>
-        
-        <!-- التذييل والتوقيع -->
-        <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; position: relative; z-index: 2;">
-            <p style="font-size: 13px; color: #A0ABC0; margin-bottom: 5px;">تم توليد هذا الدليل آلياً عبر نظام المحتوى الذكي</p>
-            <p style="font-size: 15px; font-weight: 800; color: #fff; margin: 0;">جميع الحقوق محفوظة © <span id="pdf-footer-name" style="color: #FFD700;">هيثم ابراهيم</span> 2026</p>
+        <!-- المنطقة السفلية (يتم دفعها للأسفل) -->
+        <div style="position: absolute; bottom: 60px; left: 50px; right: 50px;">
+            <!-- نصيحة سرية (Pro Tip) -->
+            <div style="background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(184,134,11,0.05) 100%); padding: 30px; border-radius: 16px; border-right: 4px solid #FFD700; position: relative; z-index: 2; margin-bottom: 30px;">
+                <h4 style="margin: 0 0 10px 0; color: #FFD700; font-size: 20px; font-weight: 800;"><i class="ri-lightbulb-flash-fill" style="margin-left: 8px;"></i> السر الذهبي للمحترفين:</h4>
+                <p id="pdf-doc-tip" style="font-size: 17px; line-height: 1.8; color: #E2E8F0; margin: 0; text-align: justify;"></p>
+            </div>
+            
+            <!-- التذييل والتوقيع -->
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; position: relative; z-index: 2;">
+                <p style="font-size: 14px; color: #A0ABC0; margin-bottom: 5px;">تم توليد هذا الدليل آلياً عبر نظام المحتوى الذكي</p>
+                <p style="font-size: 16px; font-weight: 800; color: #fff; margin: 0;">جميع الحقوق محفوظة © <span id="pdf-footer-name" style="color: #FFD700;">هيثم ابراهيم</span> 2026</p>
+            </div>
         </div>
     </div>
 
@@ -1777,30 +1781,30 @@
             const generatedIntro = "هذه الأداة الذكية تعتبر من أقوى أدوات الذكاء الاصطناعي التي نعتمد عليها في تسريع وتيرة العمل. من خلال هذا الدليل السريع، ستتعلم كيف تستخدمها باحترافية لتوليد أفكار ومخرجات تنافس الخبراء، دون الحاجة لأي خبرة برمجية سابقة.";
             
             const stepsHTML = `
-                <div style="background: #141A23; padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; gap: 15px; align-items: flex-start;">
-                    <div style="min-width: 40px; height: 40px; border-radius: 50%; background: #2A2315; color: #FFD700; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; border: 1px solid rgba(255,215,0,0.3);">1</div>
+                <div style="background: #141A23; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; gap: 20px; align-items: flex-start; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <div style="min-width: 45px; height: 45px; border-radius: 50%; background: #2A2315; color: #FFD700; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; border: 1px solid rgba(255,215,0,0.3);">1</div>
                     <div>
-                        <h4 style="margin: 0 0 5px 0; color: #fff; font-size: 17px;">التسجيل وإعداد بيئة العمل</h4>
-                        <p style="margin: 0; color: #A0ABC0; font-size: 14px; line-height: 1.6;">قم بالدخول إلى الواجهة الرئيسية للأداة، وتأكد من تفعيل وضع "المطور" للحصول على خيارات التعديل المتقدمة والصلاحيات الكاملة.</p>
+                        <h4 style="margin: 0 0 8px 0; color: #fff; font-size: 19px;">التسجيل وإعداد بيئة العمل</h4>
+                        <p style="margin: 0; color: #A0ABC0; font-size: 16px; line-height: 1.6;">قم بالدخول إلى الواجهة الرئيسية للأداة، وتأكد من تفعيل وضع المطور للحصول على خيارات التعديل المتقدمة والصلاحيات الكاملة.</p>
                     </div>
                 </div>
-                <div style="background: #141A23; padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; gap: 15px; align-items: flex-start;">
-                    <div style="min-width: 40px; height: 40px; border-radius: 50%; background: #2A2315; color: #FFD700; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; border: 1px solid rgba(255,215,0,0.3);">2</div>
+                <div style="background: #141A23; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; gap: 20px; align-items: flex-start; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <div style="min-width: 45px; height: 45px; border-radius: 50%; background: #2A2315; color: #FFD700; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; border: 1px solid rgba(255,215,0,0.3);">2</div>
                     <div>
-                        <h4 style="margin: 0 0 5px 0; color: #fff; font-size: 17px;">كتابة الأوامر (Prompts) بدقة</h4>
-                        <p style="margin: 0; color: #A0ABC0; font-size: 14px; line-height: 1.6;">استخدم قاعدة (السياق + المهمة + الصيغة). لا تطلب طلباً عاماً، بل حدد للأداة دوراً معيناً (مثلاً: تصرف كخبير تسويق واكتب لي كذا).</p>
+                        <h4 style="margin: 0 0 8px 0; color: #fff; font-size: 19px;">كتابة الأوامر بدقة</h4>
+                        <p style="margin: 0; color: #A0ABC0; font-size: 16px; line-height: 1.6;">استخدم قاعدة السياق والمهمة والصيغة. لا تطلب طلباً عاماً، بل حدد للأداة دوراً معيناً (مثلاً: تصرف كخبير تسويق).</p>
                     </div>
                 </div>
-                <div style="background: #141A23; padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; gap: 15px; align-items: flex-start;">
-                    <div style="min-width: 40px; height: 40px; border-radius: 50%; background: #2A2315; color: #FFD700; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; border: 1px solid rgba(255,215,0,0.3);">3</div>
+                <div style="background: #141A23; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; gap: 20px; align-items: flex-start; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <div style="min-width: 45px; height: 45px; border-radius: 50%; background: #2A2315; color: #FFD700; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; border: 1px solid rgba(255,215,0,0.3);">3</div>
                     <div>
-                        <h4 style="margin: 0 0 5px 0; color: #fff; font-size: 17px;">تصدير المخرجات واستغلالها</h4>
-                        <p style="margin: 0; color: #A0ABC0; font-size: 14px; line-height: 1.6;">بعد ظهور النتيجة، قم بنسخها واستخدامها مباشرة في حملاتك أو مشاريعك. الأداة تقوم بتنقيح النصوص لغوياً وتسويقياً لتكون جاهزة فوراً.</p>
+                        <h4 style="margin: 0 0 8px 0; color: #fff; font-size: 19px;">تصدير المخرجات واستغلالها</h4>
+                        <p style="margin: 0; color: #A0ABC0; font-size: 16px; line-height: 1.6;">بعد ظهور النتيجة، قم بنسخها واستخدامها مباشرة في حملاتك. الأداة تقوم بتنقيح النصوص لغوياً وتسويقياً لتكون جاهزة.</p>
                     </div>
                 </div>
             `;
             
-            const generatedTip = "دائماً قم بتغذية الأداة بأمثلة سابقة لعملك. الذكاء الاصطناعي يتعلم من الأنماط (Zero-shot vs Few-shot)، وإعطاؤه مثالين سيوفر عليك 80% من وقت التعديل اللاحق!";
+            const generatedTip = "دائماً قم بتغذية الأداة بأمثلة سابقة لعملك. الذكاء الاصطناعي يتعلم من الأنماط، وإعطاؤه مثالين سيوفر عليك 80% من وقت التعديل اللاحق!";
             
             // حقن البيانات في القالب الفاخر
             document.getElementById('pdf-doc-author').textContent = authorName;
@@ -1813,13 +1817,14 @@
             const template = document.getElementById('pdf-export-template');
             template.style.display = 'block';
             
-            // إعدادات تصدير ملف الـ PDF ليكون ككتاب إلكتروني A4
+            // إعدادات تصدير ملف الـ PDF 
             const opt = {
-              margin:       [10, 0, 10, 0], // هوامش صغيرة للحفاظ على الإطار
+              margin:       0, // بدون هوامش لأن القالب مصمم بدقة A4
               filename:     'دليل_الأداة_' + authorName.replace(/ /g, '_') + '.pdf',
               image:        { type: 'jpeg', quality: 1 },
-              html2canvas:  { scale: 4, useCORS: true, letterRendering: true, backgroundColor: "#0B0E14" },
-              jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+              // تم إزالة letterRendering لمنع انعكاس/تقطيع الحروف العربية
+              html2canvas:  { scale: 3, useCORS: true, backgroundColor: "#0B0E14" },
+              jsPDF:        { unit: 'px', format: [794, 1123], orientation: 'portrait' }
             };
 
             // توليد الملف
